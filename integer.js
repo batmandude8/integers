@@ -1,7 +1,8 @@
 const option1 = document.getElementById("option1");
 const option2 = document.getElementById("option2");
 const option3 = document.getElementById("option3");
-const audio = document.getElementById("myAudio");
+const audio_no = document.getElementById("noAudio");
+const audio_yes = document.getElementById("yesAudio");
 var answer = 0;
 
 function generate_equation(){
@@ -34,27 +35,67 @@ function generate_equation(){
 
 option1.addEventListener("click", function(){
     if(answer<0){
+        audio_yes.play();
         generate_equation();
     }
     else{
-        audio.play();
+        audio_no.play();
     }
 });
+document.addEventListener('keydown', function (event) {
+    if (event.code == 'Digit1') {
+        if(answer<0){
+            audio_yes.play();
+            generate_equation();
+        }
+        else{
+            audio_no.play();
+        }
+      }
+});
+
+
 option2.addEventListener("click", function(){
     if(answer==0){
+        audio_yes.play();
         generate_equation();
     }
     else{
-        audio.play();
+        audio_no.play();
     }
 });
+document.addEventListener('keydown', function (event) {
+    if (event.code == 'Digit2') {
+        if(answer==0){
+            audio_yes.play();
+            generate_equation();
+        }
+        else{
+            audio_no.play();
+        }
+      }
+});
+
+
 option3.addEventListener("click", function(){
     if(answer>0){
+        audio_yes.play();
         generate_equation();
     }
     else{
-        audio.play();
+        audio_no.play();
     }
+});
+document.addEventListener('keydown', function (event) {
+    if (event.code == 'Digit3') {
+        if(answer>0){
+            audio_yes.play();
+            generate_equation();
+        }
+        else{
+            audio_no.play();
+        }
+      }
 });
 
 generate_equation();
