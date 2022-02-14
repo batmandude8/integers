@@ -5,13 +5,8 @@
 
 
 @font-face {
-    font-family: 'STALKER1';
-      src:  url('STALKER1.ttf.woff') format('woff'),
-      url('STALKER1.ttf.svg#STALKER1') format('svg'),
-      url('STALKER1.ttf.eot'),
-      url('STALKER1.eot?#iefix') format('embedded-opentype'); 
-      font-weight: normal;
-      font-style: normal;
+    font-family: 'OCRStd';
+      src:  url('OCRAStd.otf'); 
   }
 
 body{
@@ -23,8 +18,8 @@ body{
 .container{
     padding: 20px;
     overflow: hidden;
-    background-color: #fe4a49;
-    font-family: 'STALKER1';
+    background-color: black;
+    font-family: 'OCRStd';
 }
 
 .container h1{
