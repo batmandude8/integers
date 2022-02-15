@@ -117,3 +117,8 @@ body{
     color: #fed766;
     background-color: white;
 }
+
+.scoreboard{
+    text-align: center;
+    padding-top: 10px;
+}

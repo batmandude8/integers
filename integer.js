@@ -4,6 +4,7 @@ const option3 = document.getElementById("option3");
 const audio_no = document.getElementById("noAudio");
 const audio_yes = document.getElementById("yesAudio");
 var answer = 0;
+var score = 0;
 
 function generate_equation(){
     var upperLimit = 50;
@@ -30,6 +31,7 @@ function generate_equation(){
 
     document.getElementById("num1").innerHTML = num1;
     document.getElementById("num2").innerHTML = num2;
+    
 
 };
 
@@ -37,9 +39,13 @@ option1.addEventListener("click", function(){
     if(answer<0){
         audio_yes.play();
         generate_equation();
+        score+=10;
+        document.getElementById("score").innerHTML = score;
     }
     else{
         audio_no.play();
+        score-=10;
+        document.getElementById("score").innerHTML = score;
     }
 });
 document.addEventListener('keydown', function (event) {
@@ -47,9 +53,13 @@ document.addEventListener('keydown', function (event) {
         if(answer<0){
             audio_yes.play();
             generate_equation();
+            score+=10;
+            document.getElementById("score").innerHTML = score;
         }
         else{
             audio_no.play();
+            score-=10;
+            document.getElementById("score").innerHTML = score;
         }
       }
 });
@@ -59,9 +69,13 @@ option2.addEventListener("click", function(){
     if(answer==0){
         audio_yes.play();
         generate_equation();
+        score+=10;
+        document.getElementById("score").innerHTML = score;
     }
     else{
         audio_no.play();
+        score-=10;
+        document.getElementById("score").innerHTML = score;
     }
 });
 document.addEventListener('keydown', function (event) {
@@ -69,9 +83,13 @@ document.addEventListener('keydown', function (event) {
         if(answer==0){
             audio_yes.play();
             generate_equation();
+            score+=10;
+            document.getElementById("score").innerHTML = score;
         }
         else{
             audio_no.play();
+            score-=10;
+            document.getElementById("score").innerHTML = score;
         }
       }
 });
@@ -81,9 +99,13 @@ option3.addEventListener("click", function(){
     if(answer>0){
         audio_yes.play();
         generate_equation();
+        score+=10;
+        document.getElementById("score").innerHTML = score;
     }
     else{
         audio_no.play();
+        score-=10;
+        document.getElementById("score").innerHTML = score;
     }
 });
 document.addEventListener('keydown', function (event) {
@@ -91,9 +113,13 @@ document.addEventListener('keydown', function (event) {
         if(answer>0){
             audio_yes.play();
             generate_equation();
+            score+=10;
+            document.getElementById("score").innerHTML = score;
         }
         else{
             audio_no.play();
+            score-=10;
+            document.getElementById("score").innerHTML = score;
         }
       }
 });
