@@ -25,6 +25,9 @@ function generate_equation(){
 
     var choice1 = randomNumber(minimum, maximum);
     var choice2 = randomNumber(minimum, maximum);
+
+    choice1 = num1 * choice1
+    choice2 = num2 * choice2
     
     while(choice1 == choice2 || choice1 == answer){
         var choice1 = randomNumber(minimum, maximum);
@@ -32,6 +35,8 @@ function generate_equation(){
     while(choice1 == choice2 || choice2 == answer){
         var choice2 = randomNumber(minimum, maximum);
     }
+
+
 
 
     document.getElementById("sss").innerHTML = 'x';   
@@ -48,13 +53,18 @@ function generate_equation(){
     document.getElementById("option1").innerHTML = shuffled[0];
     document.getElementById("option2").innerHTML = shuffled[1];
     document.getElementById("option3").innerHTML = shuffled[2];
+    var a = answer
+    var b = shuffled
+    return [a, b]
 
 };
 
 option1.addEventListener("click", function(){
-    if(shuffled[0] = answer){
+    if(b[0]==a){
         audio_yes.play();
-        generate_equation();
+        return_array = generate_equation();
+        a = return_array[0]
+        b = return_array[1]
         score+=10;
         document.getElementById("score").innerHTML = score;
     }
@@ -66,9 +76,11 @@ option1.addEventListener("click", function(){
 });
 document.addEventListener('keydown', function (event) {
     if (event.code == 'Digit1') {
-        if(answer<0){
+        if(b[0]==a){
             audio_yes.play();
-            generate_equation();
+            return_array = generate_equation();
+            a = return_array[0]
+            b = return_array[1]
             score+=10;
             document.getElementById("score").innerHTML = score;
         }
@@ -82,9 +94,11 @@ document.addEventListener('keydown', function (event) {
 
 
 option2.addEventListener("click", function(){
-    if(shuffled[1] = answer){
+    if(b[1]==a){
         audio_yes.play();
-        generate_equation();
+        return_array = generate_equation();
+        a = return_array[0]
+        b = return_array[1]
         score+=10;
         document.getElementById("score").innerHTML = score;
     }
@@ -96,9 +110,11 @@ option2.addEventListener("click", function(){
 });
 document.addEventListener('keydown', function (event) {
     if (event.code == 'Digit2') {
-        if(answer==0){
+        if(b[1]==a){
             audio_yes.play();
-            generate_equation();
+            return_array = generate_equation();
+            a = return_array[0]
+            b = return_array[1]
             score+=10;
             document.getElementById("score").innerHTML = score;
         }
@@ -112,9 +128,11 @@ document.addEventListener('keydown', function (event) {
 
 
 option3.addEventListener("click", function(){
-    if(shuffled[2] = answer){
+    if(b[2]==a){
         audio_yes.play();
-        generate_equation();
+        return_array = generate_equation();
+        a = return_array[0]
+        b = return_array[1]
         score+=10;
         document.getElementById("score").innerHTML = score;
     }
@@ -126,9 +144,11 @@ option3.addEventListener("click", function(){
 });
 document.addEventListener('keydown', function (event) {
     if (event.code == 'Digit3') {
-        if(answer>0){
+        if(b[2]==a){
             audio_yes.play();
-            generate_equation();
+            return_array = generate_equation();
+            a = return_array[0]
+            b = return_array[1]
             score+=10;
             document.getElementById("score").innerHTML = score;
         }
@@ -146,4 +166,8 @@ document.addEventListener('keydown', function (event) {
 
 
 
-generate_equation();
+return_array = generate_equation();
+a = return_array[0]
+b = return_array[1]
+
+console.log(a, b)
