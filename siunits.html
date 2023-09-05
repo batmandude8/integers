@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style_drill.css">
+    <link rel="stylesheet" href="siunits.css">
     <title>Integer</title>
 </head>
 <body>
@@ -26,37 +26,33 @@
             <ul>
                 <li><a href="index.html">Add/Subtract</a></li>
                 <li><a href="integer2.html">Multiply/Divide</a></li>
-                <li class="current"><a href="speeddrill.html">Speed Drill</a></li>
-                <li><a href="siunits.html">SI Units</a></li>
+                <li><a href="speeddrill.html">Speed Drill</a></li>
+                <li class="current"><a href="siunits.html">SI Units</a></li>
             </ul>
         </div>        
     </header>
-
     <div class="scoreboard">
         <h1>Score: <span id="score"></span></h1>
     </div>
     <div class="wrapper">
         <div class="equation">
-            <h1 id="num1" style="color: #4B5320;">1</h1>
+            <h2 ><span id="num1" style="color: #4B5320;">0</span> <span id="unit1" style="color: #4B5320;">a</span><span id="unita" style="color: #4B5320;"></span></h2>
+            <h2>is</h1>
+            <h2><span id="num2" style="color: #4B5320;">0</span> <span id="unit2" style="color: #4B5320;">.</span><span id="unitb" style="color: #4B5320;"></span> ?</h1>
+            <!-- <h1 id="num1" style="color: #4B5320;">1</h1>
             <h1 id="sss" style="color: black;">+</h1>
             <h1 id="num2" style="color: #4B5320;">1</h1>
-            <h1 style="color: black;">=</h1>
-            <!-- <h1 style="color: black;">?</h1> -->
+            <h1 style="color: black;">=</h1> -->
         </div>
         <div class="answer-options">
-            <h1 id="option1">-</h1>
-            <h1 id="option2">0</h1>
-            <h1 id="option3">+</h1>
+            <h1 id="option1">Yes</h1>
+            <h1 id="option2">No</h1>
+            <!-- <h1 id="option3">+</h1> -->
         </div>
     </div>
     <div class="description">
-        <p>Is the answer Option A (Key:1), Option B (Key:2), or Option C (Key:3)?</p>
-        <br>
-        <p><a href="https://coolors.co/e6e6ea-000000-4b5320-a3320b-e6af2e" target="_blank">Color Palette</a></p>
+        <p>Is the answer Negative (Key:1), Zero (Key:2), or Positive (Key:3)?</p>
     </div>
-    <div class="palette">
-        
-    </div>
-    <script src="speeddrill.js"></script>
+    <script src="siunits.js"></script>
 </body>
 </html>
