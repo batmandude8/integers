@@ -47,7 +47,6 @@ const polyatomics = [
     ['tin(II)', 'Sn', '2+', '<sup>2+</sup>']
 ];
 
-
 function mathhh (){
     var poly0 = polyatomics[Math.floor(Math.random()*polyatomics.length)];
 
@@ -61,7 +60,6 @@ function mathhh (){
         var poly2 = polyatomics[Math.floor(Math.random()*polyatomics.length)];
       };
 
-    console.log(poly0)
     document.getElementById("prompt").innerHTML = poly0[1] + poly0[3];
       
 
@@ -69,25 +67,47 @@ function mathhh (){
     var fakeanswer1 = poly1[0];
     var fakeanswer2 = poly2[0];
 
+
+
+
     return [poly0, answer, fakeanswer1, fakeanswer2]
     
 
 };
 
-var arrr = mathhh()
 function generate_equation(){
-    random_num_array = [1,2,3];
-    random_num_array.sort(() => Math.random() - 0.5);
 
-    
-    var choice1 = arrr[random_num_array[0]]
-    var choice2 = arrr[random_num_array[1]]
-    var choice3 = arrr[random_num_array[2]]
+  var poly0 = polyatomics[Math.floor(Math.random()*polyatomics.length)];
 
+  var poly1 = polyatomics[Math.floor(Math.random()*polyatomics.length)];
+  while (poly0 == poly1) {
+      var poly1 = polyatomics[Math.floor(Math.random()*polyatomics.length)];
+    };
 
-    document.getElementById("option1").innerHTML = choice1;
-    document.getElementById("option2").innerHTML = choice2;
-    document.getElementById("option3").innerHTML = choice3;
+  var poly2 = polyatomics[Math.floor(Math.random()*polyatomics.length)];
+  while (poly0 == poly2 || poly1 == poly2) {
+      var poly2 = polyatomics[Math.floor(Math.random()*polyatomics.length)];
+    };
+
+  document.getElementById("prompt").innerHTML = poly0[1] + poly0[3];
+  
+  var answer = poly0[0];
+  var choice1 = poly1[0];
+  var choice2 = poly2[0];
+
+  var choice_array = [answer, choice1, choice2];
+  var shuffled = choice_array
+  .map(value => ({ value, sort: Math.random() }))
+  .sort((a, b) => a.sort - b.sort)
+  .map(({ value }) => value)
+
+  document.getElementById("option1").innerHTML = shuffled[0];
+  document.getElementById("option2").innerHTML = shuffled[1];
+  document.getElementById("option3").innerHTML = shuffled[2];
+  var a = answer
+  var b = shuffled
+  return [a, b]
+
 
 };
 
@@ -95,102 +115,115 @@ function generate_equation(){
 
 
 
+option1.addEventListener("click", function(){
+  if(b[0]==a){
+      audio_yes.play();
+      return_array = generate_equation();
+      a = return_array[0]
+      b = return_array[1]
+      score+=10;
+      document.getElementById("score").innerHTML = score;
+  }
+  else{
+      audio_no.play();
+      score-=10;
+      document.getElementById("score").innerHTML = score;
+  }
+});
+document.addEventListener('keydown', function (event) {
+  if (event.code == 'Digit1') {
+      if(b[0]==a){
+          audio_yes.play();
+          return_array = generate_equation();
+          a = return_array[0]
+          b = return_array[1]
+          score+=10;
+          document.getElementById("score").innerHTML = score;
+      }
+      else{
+          audio_no.play();
+          score-=10;
+          document.getElementById("score").innerHTML = score;
+      }
+    }
+});
+
+
+option2.addEventListener("click", function(){
+  if(b[1]==a){
+      audio_yes.play();
+      return_array = generate_equation();
+      a = return_array[0]
+      b = return_array[1]
+      score+=10;
+      document.getElementById("score").innerHTML = score;
+  }
+  else{
+      audio_no.play();
+      score-=10;
+      document.getElementById("score").innerHTML = score;
+  }
+});
+document.addEventListener('keydown', function (event) {
+  if (event.code == 'Digit2') {
+      if(b[1]==a){
+          audio_yes.play();
+          return_array = generate_equation();
+          a = return_array[0]
+          b = return_array[1]
+          score+=10;
+          document.getElementById("score").innerHTML = score;
+      }
+      else{
+          audio_no.play();
+          score-=10;
+          document.getElementById("score").innerHTML = score;
+      }
+    }
+});
+
+
+option3.addEventListener("click", function(){
+  if(b[2]==a){
+      audio_yes.play();
+      return_array = generate_equation();
+      a = return_array[0]
+      b = return_array[1]
+      score+=10;
+      document.getElementById("score").innerHTML = score;
+  }
+  else{
+      audio_no.play();
+      score-=10;
+      document.getElementById("score").innerHTML = score;
+  }
+});
+document.addEventListener('keydown', function (event) {
+  if (event.code == 'Digit3') {
+      if(b[2]==a){
+          audio_yes.play();
+          return_array = generate_equation();
+          a = return_array[0]
+          b = return_array[1]
+          score+=10;
+          document.getElementById("score").innerHTML = score;
+      }
+      else{
+          audio_no.play();
+          score-=10;
+          document.getElementById("score").innerHTML = score;
+      }
+    }
+});
 
 
 
 
 
-// option1.addEventListener("click", function(){
-//     if(arrr[0] == true){
-//         audio_yes.play();
-//         arrr = mathhh();
-//         generate_equation();
-//         score+=10;
-//         document.getElementById("score").innerHTML = score;
-//     }
-//     else{
-//         audio_no.play();
-//         score-=10;
-//         document.getElementById("score").innerHTML = score;
-//     }
-// });
-// document.addEventListener('keydown', function (event) {
-//     if (event.code == 'Digit1') {
-//         if(arrr[0] == true){
-//             audio_yes.play();
-//             arrr = mathhh();
-//             generate_equation();
-//             score+=10;
-//             document.getElementById("score").innerHTML = score;
-//         }
-//         else{
-//             audio_no.play();
-//             score-=10;
-//             document.getElementById("score").innerHTML = score;
-//         }
-//       }
-// });
 
 
-// option2.addEventListener("click", function(){
-//     if(arrr[0] == false){
-//         audio_yes.play();
-//         arrr = mathhh();
-//         generate_equation();
-//         score+=10;
-//         document.getElementById("score").innerHTML = score;
-//     }
-//     else{
-//         audio_no.play();
-//         score-=10;
-//         document.getElementById("score").innerHTML = score;
-//     }
-// });
-// document.addEventListener('keydown', function (event) {
-//     if (event.code == 'Digit2') {
-//         if(arrr[0] == false){
-//             audio_yes.play();
-//             arrr = mathhh();
-//             generate_equation();
-//             score+=10;
-//             document.getElementById("score").innerHTML = score;
-//         }
-//         else{
-//             audio_no.play();
-//             score-=10;
-//             document.getElementById("score").innerHTML = score;
-//         }
-//       }
-// });
+return_array = generate_equation();
+a = return_array[0]
+b = return_array[1]
 
-
-// option3.addEventListener("click", function(){
-//     if(answer>0){
-//         audio_yes.play();
-//         generate_equation();
-//         score+=10;
-//         document.getElementById("score").innerHTML = score;
-//     }
-//     else{
-//         audio_no.play();
-//         score-=10;
-//         document.getElementById("score").innerHTML = score;
-//     }
-// });
-// document.addEventListener('keydown', function (event) {
-//     if (event.code == 'Digit3') {
-//         if(answer>0){
-//             audio_yes.play();
-//             generate_equation();
-//             score+=10;
-//             document.getElementById("score").innerHTML = score;
-//         }
-//         else{
-//             audio_no.play();
-//             score-=10;
-//             document.getElementById("score").innerHTML = score;
-//         }
-//       }
-// });
-var arrr = mathhh();
-generate_equation();
+console.log(a, b)
