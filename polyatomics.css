@@ -86,6 +86,7 @@ body{
 .answer-options{
     font-size: 48px;
     margin-right: 10px;
+    margin-left: 10px;
 }
 
 .answer-options p{
