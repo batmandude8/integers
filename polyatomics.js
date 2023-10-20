@@ -61,7 +61,7 @@ function generate_equationa(){
       var poly2 = polyatomics[Math.floor(Math.random()*polyatomics.length)];
     };
 
-  document.getElementById("prompt").innerHTML = '<h2>What is the <span id="questions" style="color: #114B5F;">name</span> of</h2><h2><span id="prompt" style="color: #114B5F;">'+poly0[1] + '<sub>'+ poly0[3] + '</sub></span>?</h1>';
+  document.getElementById("prompt").innerHTML = '<h2>What is the <span id="questions" style="color: #114B5F;">name</span> of</h2><h2><span id="prompt" style="color: #114B5F;">'+poly0[1] + '<sup>'+ poly0[3] + '</sup></span>?</h1>';
   
   var answer = poly0[0];
   var choice1 = poly1[0];
