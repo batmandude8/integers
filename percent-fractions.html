@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style_drill.css">
+
+
+
+<title>Percent Game</title>
+<style>
+    /* body {
+        font-family: Arial, sans-serif;
+    }
+    #game-container {
+        text-align: center;
+    }
+    #main-div {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    #fraction-container {
+        display: flex;
+        justify-content: center;
+    }
+    .fraction {
+        cursor: pointer;
+        padding: 10px;
+        margin: 0 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    .fraction:hover {
+        background-color: #f0f0f0;
+    } */
+
+    #fraction-container h1 {
+        font-size: 64px;
+    }
+
+    .main-div{
+    display: inline;
+    padding: 20px;
+}
+
+
+</style>
+</head>
+<body>
+    <audio id="noAudio">
+        <source src="no.mp3">
+    </audio>
+    <audio id="yesAudio">
+        <source src="yes.mp3">
+    </audio>
+
+    <header>
+        <div class="container">
+            <h1>STEM Practice</h1>
+            <ul>
+                <li><a href="index.html">Add/Subtract</a></li>
+                <li><a href="integer2.html">Multiply/Divide</a></li>
+                <li><a href="speeddrill.html">Speed Drill</a></li>
+                <li><a href="siunits.html">SI Units</a></li>
+                <li><a href="polyatomics.html">Polyatomics</a></li>
+                <li class="current"><a href="percent-fractions.html">Percents to Fractions</a></li>
+            </ul>
+        </div>        
+    </header>
+
+
+    <div id="score" class="scoreboard">
+        <h1>Score: <span id="score-value">0</span></h1>
+    </div>
+
+    <div class="wrapper">
+        <div id="game-container" class="equation">
+            <h1 id="main-div" style="color: #4B5320;"></h1>
+        </div>
+        <div class="answer-options">
+            <div id="fraction-container"></div>
+            <!-- <h1 id="option1">-</h1>
+            <h1 id="option2">0</h1>
+            <h1 id="option3">+</h1> -->
+        </div>
+    </div>
+    <div class="description">
+        <p>Select the correct fraction</p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+const audio_no = document.getElementById("noAudio");
+const audio_yes = document.getElementById("yesAudio");
+
+
+    // Function to generate a random integer between min and max (inclusive)
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Function to find the greatest common divisor (GCD) of two numbers
+    function gcd(a, b) {
+        return b === 0 ? a : gcd(b, a % b);
+    }
+
+    // Function to simplify a fraction
+    function simplifyFraction(numerator, denominator) {
+        const divisor = gcd(numerator, denominator);
+        return {
+            numerator: numerator / divisor,
+            denominator: denominator / divisor
+        };
+    }
+
+    // Function to shuffle an array
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Function to generate random fractions for incorrect answers
+    function generateRandomFractions(percent) {
+        const fractions = [];
+        const reducedFraction = simplifyFraction(percent, 100);
+        fractions.push([reducedFraction, percent]); // Correct answer
+        while (fractions.length < 3) {
+            const numerator = getRandomInt(1, reducedFraction.numerator - 1);
+            const denominator = getRandomInt(reducedFraction.numerator + 1, 100);
+            fractions.push(simplifyFraction(numerator, denominator));
+        }
+        return shuffleArray(fractions);
+    }
+
+    // Function to display fractions in the UI
+    function displayFractions(fractions) {
+        const fractionContainer = document.getElementById('fraction-container');
+        fractionContainer.innerHTML = '';
+        fractions.forEach((fraction, index) => {
+            const fractionH1 = document.createElement('h1');
+            fractionH1.id = 'option'+(1+index);
+
+            if (fraction.length == 2) {
+                fractionH1.textContent = `${fraction[0].numerator}/${fraction[0].denominator}`;
+            }
+            else {
+                fractionH1.textContent = `${fraction.numerator}/${fraction.denominator}`;
+            }
+
+            fractionH1.addEventListener('click', () => {
+                if (fraction.length == 2) {
+                    score += 10;
+                    audio_yes.play();
+                    document.getElementById('score-value').textContent = score;
+                    generateNewProblem();
+                } else {
+                    score -= 10;
+                    audio_no.play();
+                    document.getElementById('score-value').textContent = score;
+                }
+            });
+
+            fractionContainer.appendChild(fractionH1);
+        });
+    }
+
+    // Function to generate a new problem
+    function generateNewProblem() {
+        percent = getRandomInt(1, 100);
+        document.getElementById('main-div').textContent = `${percent}%`;
+        const fractions = generateRandomFractions(percent);
+        displayFractions(fractions);
+    }
+
+    let percent;
+    let score = 0;
+
+    // Start the game
+    generateNewProblem();
+</script>
+
+</body>
+</html>
