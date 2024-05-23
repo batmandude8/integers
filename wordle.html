@@ -1,0 +1,131 @@
+<html>
+<head>
+    {% load static %}
+    <script type="module" src="words.js'"></script>
+    <script type="module" src="solver.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .black-box {
+          color: white;
+          background-color: #787c7e;
+          text-align: center;
+          font-size: 20px; /* Adjust the font size as needed */
+          margin: 5px; /* Adjust the margin as needed */
+          border: 1px solid black; /* Add a border for better visibility */
+        }
+
+        #green-letters-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 10px; /* Adjust the gap between rows as needed */
+        }
+
+        .green-letter-row {
+          display: flex;
+          justify-content: center;
+          width: 100%; /* Ensure all rows have the same width */
+        }
+
+        .green-box {
+          color: white;
+          width: 40px; /* Adjust the width to create squares */
+          height: 40px; /* Same as width for squares */
+          background-color: #6aaa64;
+          text-align: center;
+          font-size: 20px; /* Adjust the font size as needed */
+          margin: 5px; /* Adjust the margin as needed */
+          border: 1px solid black; /* Add a border for better visibility */
+        }
+
+        #yellow-letters-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 10px; /* Adjust the gap between rows as needed */
+        }
+
+        .yellow-letter-row {
+          display: flex;
+          justify-content: center;
+          width: 100%; /* Ensure all rows have the same width */
+        }
+
+        .yellow-box {
+          color: white;
+          width: 40px; /* Adjust the width to create squares */
+          height: 40px; /* Same as width for squares */
+          background-color: #c9b458;
+          text-align: center;
+          font-size: 20px; /* Adjust the font size as needed */
+          margin: 5px; /* Adjust the margin as needed */
+          border: 1px solid black; /* Add a border for better visibility */
+        }
+
+        #button-container {
+          margin-top: 10px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 10px; /* Adjust the gap between rows as needed */
+        }
+
+        #word-results {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+        }
+
+    </style>
+</head>
+
+<body>
+<h1>Wordle Solver</h1>
+
+<h2>Black Letters</h2>
+<div class="black-letters">
+    <input type="text" class="black-box" id="bbox">
+</div>
+
+
+<h2>Green Letters</h2>
+<div class="green-letters" id="green-letters-container">
+    <div class="green-letter-row">
+        <input type="text" class="green-box" id="gbox0" maxlength="1">
+        <input type="text" class="green-box" id="gbox1" maxlength="1">
+        <input type="text" class="green-box" id="gbox2" maxlength="1">
+        <input type="text" class="green-box" id="gbox3" maxlength="1">
+        <input type="text" class="green-box" id="gbox4" maxlength="1">
+    </div>
+</div>
+
+<h2>Yellow Letters</h2>
+<div class="yellow-letters" id="yellow-letters-container">
+    <div class="yellow-letter-row">
+        <input type="text" class="yellow-box" maxlength="1">
+        <input type="text" class="yellow-box" maxlength="1">
+        <input type="text" class="yellow-box" maxlength="1">
+        <input type="text" class="yellow-box" maxlength="1">
+        <input type="text" class="yellow-box" maxlength="1">
+    </div>
+</div>
+
+<div id="button-container">
+    <button id="addYellowRow">Add Row</button>
+    <button id="submit">Submit</button>
+</div>
+
+
+<div class="" id="word-results">
+    <p id="listLength"></p>
+    <ul id="wordList"></ul>
+</div>
+
+</body>
+</html>
