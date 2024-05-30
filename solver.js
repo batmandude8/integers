@@ -9,7 +9,6 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
-
 document.getElementById("addYellowRow").addEventListener("click", function() {
     const yellowLettersContainer = document.getElementById("yellow-letters-container");
     const newRow = document.createElement("div");
@@ -26,7 +25,7 @@ document.getElementById("addYellowRow").addEventListener("click", function() {
 
 
 document.getElementById("submit").addEventListener("click", function() {
-    const blackletters = document.getElementById("bbox").value;
+    const blackletters = document.getElementById("bbox").value.toLowerCase();
     const greenletters = [];
     const yellowletters = [];
 
@@ -35,7 +34,7 @@ document.getElementById("submit").addEventListener("click", function() {
         const gbox = document.getElementById(`gbox${i}`);
         const letter = gbox.value;
         if (letter) {
-            greenletters.push([i, letter]);
+            greenletters.push([i, letter.toLowerCase()]);
         }
     }
 
@@ -46,7 +45,7 @@ document.getElementById("submit").addEventListener("click", function() {
         yellowBoxes.forEach((ybox, boxIndex) => {
             const letter = ybox.value;
             if (letter) {
-                yellowletters.push([boxIndex, letter]);
+                yellowletters.push([boxIndex, letter.toLowerCase()]);
             }
         });
     });
@@ -64,6 +63,9 @@ document.getElementById("submit").addEventListener("click", function() {
 
 function solver(blackletters, greentuple, yellowtuple){
 
+//var blackletters = "iubgsh"; //etyuis
+//var greentuple = [[2, 'a'], [3, 'd'], [4, 'e']];
+//var yellowtuple = [[0, 'a'], [1, 'd'], [3, 'e'], [1, 'a'], [2, 'd']];
 
 var greenletters = greentuple.map(tuple => tuple[1]).join('');
 var yellowletters = yellowtuple.map(tuple => tuple[1]).join('');
@@ -135,7 +137,6 @@ function notAnyLetters(chars, string) {
   return !chars.split('').some(letter => string.includes(letter));
 }
 
-
 var alist = [];
 
 for (const word of WORDS) {
@@ -168,41 +169,81 @@ for (const word of WORDS) {
 }
 
 
+function getLetterFrequency(words, ignoreString) {
+    const frequency = {};
 
-function customSort(words, WORDS2) {
-  // Create a map to store the priority for each word
-  const wordPriority = new Map();
-  for (const [word, priority] of WORDS2) {
-    wordPriority.set(word, priority);
-  }
+    // Create a set of letters to be ignored
+    const ignoreSet = new Set(ignoreString.toLowerCase());
 
-  // Sort the words based on the custom priority
-  return words.sort((a, b) => {
-    const priorityA = wordPriority.get(a) || 1; // Default priority is 1
-    const priorityB = wordPriority.get(b) || 1; // Default priority is 1
+    words.forEach(word => {
+        // Create a set of unique letters from the word
+        const uniqueLetters = new Set(word.toLowerCase());
 
-    // Sort in descending order of priority
-    return priorityB - priorityA;
-  });
+        // Update the frequency count for each unique letter
+        uniqueLetters.forEach(letter => {
+            // Skip the letter if it's in the ignoreSet
+            if (!ignoreSet.has(letter)) {
+                if (frequency[letter]) {
+                    frequency[letter]++;
+                } else {
+                    frequency[letter] = 1;
+                }
+            }
+        });
+    });
+    return frequency;
 }
 
-var alist = customSort(alist, WORDS2);
+function formatFrequency(frequency) {
+    // Calculate the total number of counted letters
+    const total = Object.values(frequency).reduce((sum, count) => sum + count, 0);
 
+    // Convert frequency counts to percentage and create an array of letter-frequency pairs
+    const frequencyArray = Object.entries(frequency).map(([letter, count]) => {
+        return { letter, percentage: (count / total * 100).toFixed(2) };
+    });
 
+    // Sort the array by frequency percentage in descending order
+    frequencyArray.sort((a, b) => b.percentage - a.percentage);
 
-// Function to display the contents of "alist"
+    // Convert array back to an object for easier lookups
+    const frequencyObject = {};
+    frequencyArray.forEach(({ letter, percentage }) => {
+        frequencyObject[letter] = parseFloat(percentage);
+    });
+
+    return frequencyObject;
+}
+
+function calculateWordScore(word, letterFrequency) {
+    let score = 0;
+    const uniqueLetters = new Set(word.toLowerCase());
+
+    uniqueLetters.forEach(letter => {
+        if (letterFrequency[letter]) {
+            score += letterFrequency[letter];
+        }
+    });
+
+    return score;
+}
+
+function orderWordsByFrequency(words, letterFrequency) {
+    return words.slice().sort((a, b) => calculateWordScore(b, letterFrequency) - calculateWordScore(a, letterFrequency));
+}
+
+const letterFrequency = getLetterFrequency(alist, validletters);
+const formattedFrequency = formatFrequency(letterFrequency);
+
+const orderedWords = orderWordsByFrequency(alist, formattedFrequency);
+
 function displayAlist() {
     const listLength = document.getElementById("listLength");
-    listLength.textContent = `Results: ${alist.length}`;
-
+    listLength.textContent = `Results: ${orderedWords.length}`;
 
     const wordList = document.getElementById("wordList");
 
-//    alist.sort(function(a, b) {
-//        return b[1] - a[1];
-//    });
-
-    alist.forEach(function(word) {
+    orderedWords.forEach(function(word) {
         const listItem = document.createElement("li");
         listItem.textContent = word;
         wordList.appendChild(listItem);
